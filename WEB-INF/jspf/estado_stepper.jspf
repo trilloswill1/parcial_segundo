@@ -1,0 +1,25 @@
+<%@ page pageEncoding="UTF-8" %>
+<%-- estado_stepper.jspf: barra de progreso de 4 pasos según la variable de página estadoValor --%>
+<c:set var="pasoActual" value="1"/>
+<c:if test="${estadoValor == 'con_director'}"><c:set var="pasoActual" value="2"/></c:if>
+<c:if test="${estadoValor == 'aprobado_director'}"><c:set var="pasoActual" value="3"/></c:if>
+<c:if test="${estadoValor == 'aprobado'}"><c:set var="pasoActual" value="4"/></c:if>
+
+<div class="stepper">
+  <div class="step ${pasoActual > 1 ? 'done' : (pasoActual == 1 ? 'current' : '')}">
+    <span class="step-punto"><i class="fas fa-check"></i></span>
+    <span class="step-texto">Radicado</span>
+  </div>
+  <div class="step ${pasoActual > 2 ? 'done' : (pasoActual == 2 ? 'current' : '')}">
+    <span class="step-punto"><i class="fas fa-check"></i></span>
+    <span class="step-texto">Con director</span>
+  </div>
+  <div class="step ${pasoActual > 3 ? 'done' : (pasoActual == 3 ? 'current' : '')}">
+    <span class="step-punto"><i class="fas fa-check"></i></span>
+    <span class="step-texto">Aprobado por director</span>
+  </div>
+  <div class="step ${pasoActual == 4 ? 'current' : ''}">
+    <span class="step-punto"><i class="fas fa-check"></i></span>
+    <span class="step-texto">Aprobado</span>
+  </div>
+</div>

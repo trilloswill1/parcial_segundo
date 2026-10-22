@@ -1,0 +1,11 @@
+<%@ page pageEncoding="UTF-8" %>
+<%-- estado_badge.jspf: imprime la insignia de color del estado (variable de página estadoValor) --%>
+<span class="badge-estado estado-${estadoValor}">
+  <c:choose>
+    <c:when test="${estadoValor == 'radicado'}"><i class="fas fa-file-signature"></i> Radicado</c:when>
+    <c:when test="${estadoValor == 'con_director'}"><i class="fas fa-chalkboard-teacher"></i> Con director</c:when>
+    <c:when test="${estadoValor == 'aprobado_director'}"><i class="fas fa-user-check"></i> Aprobado por director</c:when>
+    <c:when test="${estadoValor == 'aprobado'}"><i class="fas fa-check-circle"></i> Aprobado</c:when>
+    <c:otherwise><i class="fas fa-question-circle"></i> Sin estado</c:otherwise>
+  </c:choose>
+</span>

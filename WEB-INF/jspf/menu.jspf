@@ -1,0 +1,163 @@
+<%@ page pageEncoding="UTF-8" %>
+<%-- menu.jspf: menú lateral según el rol de la sesión; marca activa con menuActivo --%>
+<div class="sidebar-marca">
+  <span class="sidebar-marca-icono"><i class="fas fa-graduation-cap"></i></span>
+  <span class="sidebar-marca-texto"><strong>UTS</strong><small>Trabajos de Grado</small></span>
+</div>
+
+<nav class="sidebar-nav">
+  <c:choose>
+
+    <c:when test="${sessionScope.usuarioRol == 'administrador'}">
+      <a class="sidebar-enlace ${menuActivo == 'panel' ? 'active' : ''}" href="<c:url value='/admin/panel.jsp'/>">
+        <i class="fas fa-th-large"></i> Panel
+      </a>
+      <a class="sidebar-enlace ${menuActivo == 'usuarios' ? 'active' : ''}" href="<c:url value='/admin/usuarios.jsp'/>">
+        <i class="fas fa-users"></i> Usuarios
+      </a>
+      <a class="sidebar-enlace ${menuActivo == 'notificaciones' ? 'active' : ''}" href="<c:url value='/admin/notificaciones.jsp'/>">
+        <i class="fas fa-bell"></i> Notificaciones
+      </a>
+      <hr class="sidebar-divisor">
+      <a class="sidebar-enlace ${menuActivo == 'ideas' ? 'active' : ''}" href="<c:url value='/coordinacion/ideas.jsp'/>">
+        <i class="fas fa-lightbulb"></i> Banco de Ideas
+      </a>
+      <a class="sidebar-enlace ${menuActivo == 'anteproyectos' ? 'active' : ''}" href="<c:url value='/coordinacion/anteproyectos.jsp'/>">
+        <i class="fas fa-folder-open"></i> Anteproyectos
+      </a>
+      <a class="sidebar-enlace ${menuActivo == 'entregas_finales' ? 'active' : ''}" href="<c:url value='/coordinacion/entregas_finales.jsp'/>">
+        <i class="fas fa-file-upload"></i> Entregas finales
+      </a>
+      <a class="sidebar-enlace ${menuActivo == 'inf_estudiantes' ? 'active' : ''}" href="<c:url value='/coordinacion/informe_estudiantes.jsp'/>">
+        <i class="fas fa-user-graduate"></i> Informe estudiantes
+      </a>
+      <a class="sidebar-enlace ${menuActivo == 'inf_directores' ? 'active' : ''}" href="<c:url value='/coordinacion/informe_directores.jsp'/>">
+        <i class="fas fa-chalkboard-teacher"></i> Informe directores
+      </a>
+      <a class="sidebar-enlace ${menuActivo == 'inf_evaluadores' ? 'active' : ''}" href="<c:url value='/coordinacion/informe_evaluadores.jsp'/>">
+        <i class="fas fa-clipboard-check"></i> Informe evaluadores
+      </a>
+      <a class="sidebar-enlace ${menuActivo == 'calendario' ? 'active' : ''}" href="<c:url value='/comun/calendario.jsp'/>">
+        <i class="fas fa-calendar-alt"></i> Calendario
+      </a>
+      <a class="sidebar-enlace ${menuActivo == 'formatos' ? 'active' : ''}" href="<c:url value='/comun/formatos.jsp'/>">
+        <i class="fas fa-file-alt"></i> Formatos
+      </a>
+      <a class="sidebar-enlace ${menuActivo == 'pqrs' ? 'active' : ''}" href="<c:url value='/pqrs/lista.jsp'/>">
+        <i class="fas fa-comment-dots"></i> PQRS
+      </a>
+    </c:when>
+
+    <c:when test="${sessionScope.usuarioRol == 'coordinacion'}">
+      <a class="sidebar-enlace ${menuActivo == 'panel' ? 'active' : ''}" href="<c:url value='/coordinacion/panel.jsp'/>">
+        <i class="fas fa-th-large"></i> Panel
+      </a>
+      <a class="sidebar-enlace ${menuActivo == 'notificaciones' ? 'active' : ''}" href="<c:url value='/coordinacion/notificaciones.jsp'/>">
+        <i class="fas fa-bell"></i> Notificaciones
+      </a>
+      <a class="sidebar-enlace ${menuActivo == 'ideas' ? 'active' : ''}" href="<c:url value='/coordinacion/ideas.jsp'/>">
+        <i class="fas fa-lightbulb"></i> Banco de Ideas
+      </a>
+      <a class="sidebar-enlace ${menuActivo == 'anteproyectos' ? 'active' : ''}" href="<c:url value='/coordinacion/anteproyectos.jsp'/>">
+        <i class="fas fa-folder-open"></i> Anteproyectos
+      </a>
+      <a class="sidebar-enlace ${menuActivo == 'entregas_finales' ? 'active' : ''}" href="<c:url value='/coordinacion/entregas_finales.jsp'/>">
+        <i class="fas fa-file-upload"></i> Entregas finales
+      </a>
+      <a class="sidebar-enlace ${menuActivo == 'inf_estudiantes' ? 'active' : ''}" href="<c:url value='/coordinacion/informe_estudiantes.jsp'/>">
+        <i class="fas fa-user-graduate"></i> Informe estudiantes
+      </a>
+      <a class="sidebar-enlace ${menuActivo == 'inf_directores' ? 'active' : ''}" href="<c:url value='/coordinacion/informe_directores.jsp'/>">
+        <i class="fas fa-chalkboard-teacher"></i> Informe directores
+      </a>
+      <a class="sidebar-enlace ${menuActivo == 'inf_evaluadores' ? 'active' : ''}" href="<c:url value='/coordinacion/informe_evaluadores.jsp'/>">
+        <i class="fas fa-clipboard-check"></i> Informe evaluadores
+      </a>
+      <a class="sidebar-enlace ${menuActivo == 'calendario' ? 'active' : ''}" href="<c:url value='/comun/calendario.jsp'/>">
+        <i class="fas fa-calendar-alt"></i> Calendario
+      </a>
+      <a class="sidebar-enlace ${menuActivo == 'formatos' ? 'active' : ''}" href="<c:url value='/comun/formatos.jsp'/>">
+        <i class="fas fa-file-alt"></i> Formatos
+      </a>
+      <a class="sidebar-enlace ${menuActivo == 'pqrs' ? 'active' : ''}" href="<c:url value='/pqrs/registro.jsp'/>">
+        <i class="fas fa-comment-dots"></i> PQRS
+      </a>
+    </c:when>
+
+    <c:when test="${sessionScope.usuarioRol == 'estudiante'}">
+      <a class="sidebar-enlace ${menuActivo == 'panel' ? 'active' : ''}" href="<c:url value='/estudiante/panel.jsp'/>">
+        <i class="fas fa-th-large"></i> Panel
+      </a>
+      <a class="sidebar-enlace ${menuActivo == 'notificaciones' ? 'active' : ''}" href="<c:url value='/estudiante/notificaciones.jsp'/>">
+        <i class="fas fa-bell"></i> Notificaciones
+      </a>
+      <a class="sidebar-enlace ${menuActivo == 'ideas' ? 'active' : ''}" href="<c:url value='/estudiante/ideas.jsp'/>">
+        <i class="fas fa-lightbulb"></i> Banco de Ideas
+      </a>
+      <a class="sidebar-enlace ${menuActivo == 'mi_anteproyecto' ? 'active' : ''}" href="<c:url value='/estudiante/mi_anteproyecto.jsp'/>">
+        <i class="fas fa-folder-open"></i> Mi anteproyecto
+      </a>
+      <a class="sidebar-enlace ${menuActivo == 'entrega_final' ? 'active' : ''}" href="<c:url value='/estudiante/entrega_final.jsp'/>">
+        <i class="fas fa-file-upload"></i> Entrega final
+      </a>
+      <a class="sidebar-enlace ${menuActivo == 'sustentacion' ? 'active' : ''}" href="<c:url value='/estudiante/sustentacion.jsp'/>">
+        <i class="fas fa-gavel"></i> Sustentación
+      </a>
+      <a class="sidebar-enlace ${menuActivo == 'calificacion' ? 'active' : ''}" href="<c:url value='/estudiante/calificacion.jsp'/>">
+        <i class="fas fa-star"></i> Mi calificación
+      </a>
+      <a class="sidebar-enlace ${menuActivo == 'calendario' ? 'active' : ''}" href="<c:url value='/comun/calendario.jsp'/>">
+        <i class="fas fa-calendar-alt"></i> Calendario
+      </a>
+      <a class="sidebar-enlace ${menuActivo == 'formatos' ? 'active' : ''}" href="<c:url value='/comun/formatos.jsp'/>">
+        <i class="fas fa-file-alt"></i> Formatos
+      </a>
+      <a class="sidebar-enlace ${menuActivo == 'pqrs' ? 'active' : ''}" href="<c:url value='/pqrs/registro.jsp'/>">
+        <i class="fas fa-comment-dots"></i> PQRS
+      </a>
+    </c:when>
+
+    <c:when test="${sessionScope.usuarioRol == 'director'}">
+      <a class="sidebar-enlace ${menuActivo == 'panel' ? 'active' : ''}" href="<c:url value='/director/panel.jsp'/>">
+        <i class="fas fa-th-large"></i> Panel
+      </a>
+      <a class="sidebar-enlace ${menuActivo == 'notificaciones' ? 'active' : ''}" href="<c:url value='/director/notificaciones.jsp'/>">
+        <i class="fas fa-bell"></i> Notificaciones
+      </a>
+      <a class="sidebar-enlace ${menuActivo == 'anteproyectos' ? 'active' : ''}" href="<c:url value='/director/anteproyectos.jsp'/>">
+        <i class="fas fa-folder-open"></i> Anteproyectos
+      </a>
+      <a class="sidebar-enlace ${menuActivo == 'calendario' ? 'active' : ''}" href="<c:url value='/comun/calendario.jsp'/>">
+        <i class="fas fa-calendar-alt"></i> Calendario
+      </a>
+      <a class="sidebar-enlace ${menuActivo == 'formatos' ? 'active' : ''}" href="<c:url value='/comun/formatos.jsp'/>">
+        <i class="fas fa-file-alt"></i> Formatos
+      </a>
+      <a class="sidebar-enlace ${menuActivo == 'pqrs' ? 'active' : ''}" href="<c:url value='/pqrs/registro.jsp'/>">
+        <i class="fas fa-comment-dots"></i> PQRS
+      </a>
+    </c:when>
+
+    <c:when test="${sessionScope.usuarioRol == 'evaluador'}">
+      <a class="sidebar-enlace ${menuActivo == 'panel' ? 'active' : ''}" href="<c:url value='/evaluador/panel.jsp'/>">
+        <i class="fas fa-th-large"></i> Panel
+      </a>
+      <a class="sidebar-enlace ${menuActivo == 'notificaciones' ? 'active' : ''}" href="<c:url value='/evaluador/notificaciones.jsp'/>">
+        <i class="fas fa-bell"></i> Notificaciones
+      </a>
+      <a class="sidebar-enlace ${menuActivo == 'anteproyectos' ? 'active' : ''}" href="<c:url value='/evaluador/anteproyectos.jsp'/>">
+        <i class="fas fa-folder-open"></i> Anteproyectos
+      </a>
+      <a class="sidebar-enlace ${menuActivo == 'calendario' ? 'active' : ''}" href="<c:url value='/comun/calendario.jsp'/>">
+        <i class="fas fa-calendar-alt"></i> Calendario
+      </a>
+      <a class="sidebar-enlace ${menuActivo == 'formatos' ? 'active' : ''}" href="<c:url value='/comun/formatos.jsp'/>">
+        <i class="fas fa-file-alt"></i> Formatos
+      </a>
+      <a class="sidebar-enlace ${menuActivo == 'pqrs' ? 'active' : ''}" href="<c:url value='/pqrs/registro.jsp'/>">
+        <i class="fas fa-comment-dots"></i> PQRS
+      </a>
+    </c:when>
+
+  </c:choose>
+</nav>

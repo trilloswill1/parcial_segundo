@@ -1,0 +1,10 @@
+<%@ page pageEncoding="UTF-8" %>
+<%-- seguridad.jspf: guardia de sesión y rol. Usa la variable de página rolRequerido. --%>
+<c:if test="${empty sessionScope.usuarioId}">
+  <c:redirect url="/index.jsp"/>
+</c:if>
+<c:if test="${rolRequerido != 'cualquiera' && rolRequerido != sessionScope.usuarioRol && sessionScope.usuarioRol != 'administrador'}">
+  <c:redirect url="/index.jsp">
+    <c:param name="error" value="No tienes permiso para entrar a esa secci??n"/>
+  </c:redirect>
+</c:if>

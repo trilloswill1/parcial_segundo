@@ -1,0 +1,59 @@
+<%@ page pageEncoding="UTF-8" %>
+<%-- header.jspf: abre el documento HTML, la plantilla (sidebar + topbar) y muestra alertas --%>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><c:out value="${tituloPagina}"/> | Trabajos de Grado UTS</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="<c:url value='/css/estilo.css'/>">
+</head>
+<body>
+<div class="app-shell">
+
+  <%-- Sidebar: fijo en escritorio y offcanvas en móvil (sin JavaScript propio) --%>
+  <aside class="app-sidebar offcanvas offcanvas-start" tabindex="-1" id="menuLateral" aria-label="Menú principal">
+    <div class="offcanvas-header d-lg-none">
+      <span class="sidebar-marca-texto"><i class="fas fa-graduation-cap me-2"></i>UTS · Trabajos de Grado</span>
+      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Cerrar menú"></button>
+    </div>
+    <%@ include file="/WEB-INF/jspf/menu.jspf" %>
+  </aside>
+
+  <div class="app-main">
+
+    <%-- Barra superior: botón de menú en móvil, usuario y cierre de sesión --%>
+    <header class="app-topbar">
+      <div class="topbar-izquierda">
+        <button class="btn btn-menu-movil d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#menuLateral" aria-label="Abrir menú">
+          <i class="fas fa-bars"></i>
+        </button>
+        <span class="topbar-titulo"><c:out value="${tituloPagina}"/></span>
+      </div>
+      <div class="topbar-derecha">
+        <span class="topbar-usuario"><i class="fas fa-user-circle me-1"></i><c:out value="${sessionScope.usuarioNombre}"/></span>
+        <span class="badge-rol"><c:out value="${sessionScope.usuarioRol}"/></span>
+        <a class="btn-salir" href="<c:url value='/logout.jsp'/>"><i class="fas fa-sign-out-alt me-1"></i>Cerrar sesión</a>
+      </div>
+    </header>
+
+    <%-- Contenido de la página --%>
+    <main class="app-content">
+
+      <%-- Mensajes de éxito y error que llegan por parámetro --%>
+      <c:if test="${not empty param.ok}">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <i class="fas fa-check-circle me-2"></i><c:out value="${param.ok}"/>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+        </div>
+      </c:if>
+      <c:if test="${not empty param.error}">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <i class="fas fa-exclamation-circle me-2"></i><c:out value="${param.error}"/>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+        </div>
+      </c:if>

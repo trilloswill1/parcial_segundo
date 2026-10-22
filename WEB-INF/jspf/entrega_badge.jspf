@@ -1,0 +1,10 @@
+<%@ page pageEncoding="UTF-8" %>
+<%-- entrega_badge.jspf: insignia de color del estado de una entrega final (variable de página entregaEstado) --%>
+<span class="badge-simple ${entregaEstado == 'Aprobado' ? 'aprobado' : (entregaEstado == 'Rechazado' ? 'rechazado' : (entregaEstado == 'En revisión' ? 'revision' : 'entregado'))}">
+  <c:choose>
+    <c:when test="${entregaEstado == 'Aprobado'}"><i class="fas fa-check-circle"></i> Aprobado</c:when>
+    <c:when test="${entregaEstado == 'Rechazado'}"><i class="fas fa-times-circle"></i> Rechazado</c:when>
+    <c:when test="${entregaEstado == 'En revisión'}"><i class="fas fa-hourglass-half"></i> En revisión</c:when>
+    <c:otherwise><i class="fas fa-upload"></i> Entregado</c:otherwise>
+  </c:choose>
+</span>

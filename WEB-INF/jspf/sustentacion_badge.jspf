@@ -1,0 +1,9 @@
+<%@ page pageEncoding="UTF-8" %>
+<%-- sustentacion_badge.jspf: insignia de estado de una sustentación (variable de página sustEstado) --%>
+<span class="badge-simple ${sustEstado == 'Realizada' ? 'realizada' : (sustEstado == 'Cancelada' ? 'cancelada' : 'programada')}">
+  <c:choose>
+    <c:when test="${sustEstado == 'Realizada'}"><i class="fas fa-check-circle"></i> Realizada</c:when>
+    <c:when test="${sustEstado == 'Cancelada'}"><i class="fas fa-times-circle"></i> Cancelada</c:when>
+    <c:otherwise><i class="fas fa-calendar-check"></i> Programada</c:otherwise>
+  </c:choose>
+</span>

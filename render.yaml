@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: parcial-segundo
+    runtime: docker
+    plan: free
+    healthCheckPath: /index.jsp
+    envVars:
+      - key: DB_HOST
+        value: bxqkmbn2kft1klg6vy31-mysql.services.clever-cloud.com
+      - key: DB_PORT
+        value: "3306"
+      - key: DB_NAME
+        value: bxqkmbn2kft1klg6vy31
+      - key: DB_USER
+        value: uw4y08f5stqokclb
+      - key: DB_PASSWORD
+        sync: false

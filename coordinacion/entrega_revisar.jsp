@@ -134,23 +134,16 @@
   </form>
 </div>
 
-<%-- Botón "Asignar sustentación" aparece si la entrega está aprobada y no hay sustentación programada/realizada --%>
+<%-- Coordinación ya no asigna sustentación; es responsabilidad del evaluador --%>
+<%-- Si la entrega está aprobada pero no hay sustentación, mostrar aviso informativo --%>
 <c:if test="${e.estado == 'Aprobado' and sustExiste.rowCount == 0}">
   <div class="card-ui mt-4">
     <div class="card-ui-header">
-      <h2 class="card-ui-titulo"><i class="fas fa-gavel"></i>Siguiente paso</h2>
+      <h2 class="card-ui-titulo"><i class="fas fa-info-circle"></i>Estado</h2>
     </div>
     <div class="aviso-tarjeta mb-3">
       <i class="fas fa-info-circle"></i>
-      <span>La entrega final ha sido aprobada. Ahora puedes programar la sustentación del estudiante.</span>
-    </div>
-    <div class="d-flex gap-2">
-      <a class="btn-uts" href="<c:url value='/coordinacion/sustentacion_form.jsp?id=${e.id_anteproyecto}'/>">
-        <i class="fas fa-calendar-plus"></i> Asignar sustentación
-      </a>
-      <a class="btn-uts-outline gris" href="<c:url value='/coordinacion/entregas_finales.jsp'/>">
-        <i class="fas fa-arrow-left"></i> Volver al listado
-      </a>
+      <span>La entrega final está aprobada. La asignación de sustentación corresponde al evaluador del anteproyecto.</span>
     </div>
   </div>
 </c:if>

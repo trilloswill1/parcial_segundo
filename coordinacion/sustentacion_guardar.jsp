@@ -1,6 +1,19 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/jspf/inicio.jspf" %>
-<c:set var="rolRequerido" value="coordinacion"/>
+<c:choose>
+  <c:when test="${sessionScope.usuarioRol == 'evaluador'}">
+    <c:set var="rolRequerido" value="evaluador"/>
+    <c:set var="formUrl" value="/evaluador/entregas_finales.jsp"/>
+    <c:set var="panelUrl" value="/evaluador/panel.jsp"/>
+    <c:set var="formActionUrl" value="/coordinacion/sustentacion_guardar.jsp"/>
+  </c:when>
+  <c:otherwise>
+    <c:set var="rolRequerido" value="coordinacion"/>
+    <c:set var="formUrl" value="/coordinacion/entregas_finales.jsp"/>
+    <c:set var="panelUrl" value="/coordinacion/panel.jsp"/>
+    <c:set var="formActionUrl" value="/coordinacion/sustentacion_guardar.jsp"/>
+  </c:otherwise>
+</c:choose>
 <%@ include file="/WEB-INF/jspf/seguridad.jspf" %>
 
 <%-- Validación de campos obligatorios --%>
@@ -32,7 +45,7 @@
 </sql:query>
 
 <c:if test="${proy.rowCount == 0}">
-  <c:redirect url="/coordinacion/panel.jsp">
+  <c:redirect url="${panelUrl}">
     <c:param name="error" value="No se pudo programar: el proyecto no cumple los requisitos o ya tiene una sustentación"/>
   </c:redirect>
 </c:if>
@@ -72,7 +85,7 @@
 </c:catch>
 
 <c:if test="${not empty errorSql}">
-  <c:redirect url="/coordinacion/panel.jsp">
+  <c:redirect url="${panelUrl}">
     <c:param name="error" value="No fue posible guardar la sustentación"/>
   </c:redirect>
 </c:if>
@@ -109,6 +122,6 @@
   <sql:param value="${sustId}"/>
 </sql:update>
 
-<c:redirect url="/coordinacion/panel.jsp">
+<c:redirect url="${panelUrl}">
   <c:param name="ok" value="Sustentación programada correctamente"/>
 </c:redirect>

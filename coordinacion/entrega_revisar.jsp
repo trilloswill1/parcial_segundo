@@ -27,6 +27,12 @@
 
 <c:set var="e" value="${rs.rows[0]}"/>
 
+<%-- Verificar si ya existe sustentación para este anteproyecto --%>
+<sql:query var="sustExiste" dataSource="${bd}">
+  SELECT id FROM sustentacion WHERE id_anteproyecto = ? AND estado IN ('Programada','Realizada')
+  <sql:param value="${e.id_anteproyecto}"/>
+</sql:query>
+
 <%-- Historial de versiones del mismo anteproyecto --%>
 <sql:query var="historial" dataSource="${bd}">
   SELECT id, nombre_archivo, fecha_entrega, estado, observaciones
@@ -127,6 +133,27 @@
     </div>
   </form>
 </div>
+
+<%-- Botón "Asignar sustentación" aparece si la entrega está aprobada y no hay sustentación programada/realizada --%>
+<c:if test="${e.estado == 'Aprobado' and sustExiste.rowCount == 0}">
+  <div class="card-ui mt-4">
+    <div class="card-ui-header">
+      <h2 class="card-ui-titulo"><i class="fas fa-gavel"></i>Siguiente paso</h2>
+    </div>
+    <div class="aviso-tarjeta mb-3">
+      <i class="fas fa-info-circle"></i>
+      <span>La entrega final ha sido aprobada. Ahora puedes programar la sustentación del estudiante.</span>
+    </div>
+    <div class="d-flex gap-2">
+      <a class="btn-uts" href="<c:url value='/coordinacion/sustentacion_form.jsp?id=${e.id_anteproyecto}'/>">
+        <i class="fas fa-calendar-plus"></i> Asignar sustentación
+      </a>
+      <a class="btn-uts-outline gris" href="<c:url value='/coordinacion/entregas_finales.jsp'/>">
+        <i class="fas fa-arrow-left"></i> Volver al listado
+      </a>
+    </div>
+  </div>
+</c:if>
 
 <c:if test="${historial.rowCount > 1}">
   <div class="card-ui mt-4">

@@ -41,6 +41,14 @@
 
 <c:set var="entregaId"    value="${info.rows[0].id}"/>
 <c:set var="idEstudiante" value="${info.rows[0].id_estudiante}"/>
+<c:set var="idAnteproyecto" value="${info.rows[0].id_anteproyecto}"/>
+
+<%-- Obtener id_evaluador del anteproyecto --%>
+<sql:query var="evalInfo" dataSource="${bd}">
+  SELECT id_evaluador FROM anteproyectos WHERE id = ?
+  <sql:param value="${idAnteproyecto}"/>
+</sql:query>
+<c:set var="idEvaluador" value="${evalInfo.rows[0].id_evaluador}"/>
 
 <c:catch var="errorSql">
   <sql:update var="filas" dataSource="${bd}">
@@ -81,6 +89,17 @@
       <sql:param value="${idEstudiante}"/>
       <sql:param value="${entregaId}"/>
     </sql:update>
+
+    <%-- Notificación al evaluador si existe y es diferente de coordinación --%>
+    <c:if test="${not empty idEvaluador}">
+      <sql:update dataSource="${bd}">
+        INSERT INTO notificaciones (tipo_evento, titulo, descripcion, id_usuario, id_referencia, tabla_referencia)
+        VALUES ('entrega_final', 'Entrega final revisada por coordinación', ?, ?, ?, 'entrega_final')
+        <sql:param value="Coordinación cambió el estado de la entrega final a ${estadoDb}."/>
+        <sql:param value="${idEvaluador}"/>
+        <sql:param value="${entregaId}"/>
+      </sql:update>
+    </c:if>
 
     <c:redirect url="/coordinacion/entrega_revisar.jsp">
       <c:param name="id" value="${entregaId}"/>

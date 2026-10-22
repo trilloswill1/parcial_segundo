@@ -1,5 +1,8 @@
 FROM tomcat:8.5.96-jdk8
 
+# Limita la memoria de Java para no pasar los 512 MB del plan gratuito de Render
+ENV CATALINA_OPTS="-Xms64m -Xmx256m -XX:MaxMetaspaceSize=128m -XX:+UseSerialGC -Xss512k -Djava.security.egd=file:/dev/./urandom"
+
 # Limpia la webapp ROOT por defecto de la imagen oficial
 RUN rm -rf /usr/local/tomcat/webapps/ROOT/*
 

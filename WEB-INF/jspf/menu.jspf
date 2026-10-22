@@ -148,6 +148,9 @@
       <a class="sidebar-enlace ${menuActivo == 'anteproyectos' ? 'active' : ''}" href="<c:url value='/evaluador/anteproyectos.jsp'/>">
         <i class="fas fa-folder-open"></i> Anteproyectos
       </a>
+      <a class="sidebar-enlace ${menuActivo == 'entregas_finales' ? 'active' : ''}" href="<c:url value='/evaluador/entregas_finales.jsp'/>">
+        <i class="fas fa-file-upload"></i> Entregas finales
+      </a>
       <a class="sidebar-enlace ${menuActivo == 'calendario' ? 'active' : ''}" href="<c:url value='/comun/calendario.jsp'/>">
         <i class="fas fa-calendar-alt"></i> Calendario
       </a>

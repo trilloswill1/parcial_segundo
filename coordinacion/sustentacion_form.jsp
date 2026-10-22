@@ -1,9 +1,19 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/jspf/inicio.jspf" %>
-<c:set var="rolRequerido" value="coordinacion"/>
+<c:choose>
+  <c:when test="${sessionScope.usuarioRol == 'evaluador'}">
+    <c:set var="rolRequerido" value="evaluador"/>
+    <c:set var="menuActivo"   value="entregas_finales"/>
+    <c:set var="volverUrl" value="/evaluador/entregas_finales.jsp"/>
+  </c:when>
+  <c:otherwise>
+    <c:set var="rolRequerido" value="coordinacion"/>
+    <c:set var="menuActivo"   value="panel"/>
+    <c:set var="volverUrl" value="/coordinacion/panel.jsp"/>
+  </c:otherwise>
+</c:choose>
 <%@ include file="/WEB-INF/jspf/seguridad.jspf" %>
 <c:set var="tituloPagina" value="Asignar sustentación"/>
-<c:set var="menuActivo"   value="panel"/>
 
 <%-- Solo se puede programar si el proyecto cumple TODOS los requisitos:
      anteproyecto aprobado, entrega final aprobada y sin sustentación programada/realizada --%>
@@ -42,7 +52,7 @@
     <p class="page-subtitle">Proyecto: <strong><c:out value="${a.titulo}"/></strong></p>
   </div>
   <div class="page-actions">
-    <a class="btn-uts-outline gris" href="<c:url value='/coordinacion/panel.jsp'/>"><i class="fas fa-arrow-left"></i> Volver</a>
+    <a class="btn-uts-outline gris" href="<c:url value='${volverUrl}'/>"><i class="fas fa-arrow-left"></i> Volver</a>
   </div>
 </div>
 
@@ -120,7 +130,7 @@
 
     <div class="d-flex gap-2 mt-4">
       <button type="submit" class="btn-uts"><i class="fas fa-save"></i> Programar sustentación</button>
-      <a class="btn-uts-outline gris" href="<c:url value='/coordinacion/panel.jsp'/>"><i class="fas fa-times"></i> Cancelar</a>
+      <a class="btn-uts-outline gris" href="<c:url value='${volverUrl}'/>"><i class="fas fa-times"></i> Cancelar</a>
     </div>
   </form>
 </div>
